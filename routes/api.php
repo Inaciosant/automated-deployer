@@ -16,3 +16,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/empresas/{id}', [EmpresaController::class, 'destroy']);
 });
 
+// teste
