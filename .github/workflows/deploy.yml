@@ -69,21 +69,16 @@ jobs:
           echo "$HOME/sonar-scanner-4.7.0.2747-linux/bin" >> $GITHUB_PATH
 
       - name: Run SonarQube analysis
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           sonar-scanner \
             -Dsonar.projectKey=trabalho-docker \
             -Dsonar.sources=. \
-            -Dsonar.host.url=http://201.23.3.86:8140 \
-            -Dsonar.login=$SONAR_TOKEN
+            -Dsonar.host.url=http://201.23.3.86:8140
 
       - name: Verifica aprovação do Quality Gate
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           sleep 10
-          STATUS=$(curl -s -u $SONAR_TOKEN: "http://201.23.3.86:8140/api/qualitygates/project_status?projectKey=trabalho-docker" | jq -r .projectStatus.status)
+          STATUS=$(curl -s "http://201.23.3.86:8140/api/qualitygates/project_status?projectKey=trabalho-docker" | jq -r .projectStatus.status)
           echo "Quality Gate Status: $STATUS"
           if [ "$STATUS" != "OK" ]; then
             echo "❌ Quality Gate falhou: $STATUS"
