@@ -27,7 +27,7 @@ jobs:
           push: true
           tags: inaciosant/trabalho-docker:latest
 
-  sonarqube-analysis:
+    sonarqube-analysis:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
@@ -48,6 +48,14 @@ jobs:
 
       - name: Aguarda SonarQube subir
         run: sleep 60
+
+      - name: Instala SonarQube Scanner
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip curl
+          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
+          unzip sonar-scanner.zip -d $HOME
+          echo "$HOME/sonar-scanner-4.7.0.2747-linux/bin" >> $GITHUB_PATH
 
       - name: Run SonarQube analysis
         env:
@@ -75,7 +83,6 @@ jobs:
         if: always()
         run: |
           ssh aluno@201.23.3.86 "docker stop sonarqube && docker rm sonarqube"
-
   deploy:
     needs: sonarqube-analysis
     runs-on: ubuntu-latest
