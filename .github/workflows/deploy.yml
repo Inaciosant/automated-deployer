@@ -55,7 +55,7 @@ jobs:
               exit 0
             fi
             echo "Aguardando SonarQube subir..."
-            sleep 12
+            sleep 15
           done
           echo "SonarQube não respondeu a tempo."
           exit 1
@@ -78,7 +78,7 @@ jobs:
       - name: Verifica aprovação do Quality Gate
         run: |
           sleep 10
-          STATUS=$(curl -s "http://201.23.3.86:8140/api/qualitygates/project_status?projectKey=trabalho-docker" | jq -r .projectStatus.status)
+          STATUS=$(curl -s "http://201.23.3.86:9000/api/qualitygates/project_status?projectKey=trabalho-docker" | jq -r .projectStatus.status)
           echo "Quality Gate Status: $STATUS"
           if [ "$STATUS" != "OK" ]; then
             echo "❌ Quality Gate falhou: $STATUS"
