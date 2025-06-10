@@ -36,7 +36,7 @@ jobs:
           ssh-keyscan -H 201.23.3.86 >> ~/.ssh/known_hosts
       - name: Copiar docker-compose.yml para o servidor remoto
         run: |
-          scp ./backend-1/docker-compose.yml aluno@201.23.3.86:/home/aluno/trabalho-inacio/docker-compose.yml
+          scp docker-compose.yml aluno@201.23.3.86:/home/aluno/trabalho-inacio/docker-compose.yml
       - name: Deploy no servidor remoto
         run: |
           ssh aluno@201.23.3.86 << 'EOF'
