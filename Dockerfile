@@ -25,4 +25,4 @@ RUN composer install
 # Limpa cache do npm e faz o build do Vite
 RUN npm cache clean --force && npm install && npm run build
 
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000
+CMD php artisan config:clear && php artisan cache:clear && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000
