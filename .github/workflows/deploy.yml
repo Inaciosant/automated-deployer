@@ -54,9 +54,10 @@ jobs:
             exit 0
           fi
           echo "Aguardando SonarQube subir..."
-          sleep 12
+          sleep 15
         done
         echo "SonarQube não respondeu a tempo."
+        ssh aluno@201.23.3.86 "docker logs sonarqube"
         exit 1
 
     - name: Instala SonarQube Scanner
