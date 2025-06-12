@@ -37,6 +37,6 @@ services:
     # Remova o volume abaixo para produção
     # volumes:
     #   - .:/var/www/html
-
+# teste
 volumes:
   db_data:
