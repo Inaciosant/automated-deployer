@@ -8,7 +8,7 @@
     <div class="py-8">
         <div class="max-w-5xl mx-auto px-4">
             <div class="bg-white shadow rounded-lg p-6">
-                <h3 class="text-xl font-bold mb-6 text-indigo-700">Empresas</h3>
+                <h3 class="text-xl font-bold mb-6 text-indigo-700">Empresas do inacio</h3>
 
                 {{-- Alerta de sucesso --}}
                 @if(session('success'))
